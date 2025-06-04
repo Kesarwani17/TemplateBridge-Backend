@@ -21,12 +21,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         migrations: [__dirname + '/migrations/*{.ts,.js}'],
         autoLoadEntities: true,
         synchronize: false,
-        ssl: process.env.NODE_ENV === 'production',
+        ssl: true,
         extra: {
-          ssl:
-            process.env.NODE_ENV === 'production'
-              ? { rejectUnauthorized: false }
-              : null,
+          ssl: {
+            rejectUnauthorized:
+              process.env.NODE_ENV === 'production' ? false : true,
+          },
         },
       }),
       inject: [ConfigService],
